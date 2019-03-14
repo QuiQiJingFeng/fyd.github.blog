@@ -68,8 +68,6 @@ projects:
     url: https://github.com/QuiQiJingFeng/M2_SERVER
   - name: M2_CLIENT
     url: https://github.com/QuiQiJingFeng/M2_CLIENT
-  - name: M2_WEB
-    url: https://github.com/QuiQiJingFeng/web
   - name: WECHAT_GAME
     url: https://github.com/QuiQiJingFeng/laya_slgc
 
