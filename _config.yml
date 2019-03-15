@@ -63,13 +63,13 @@ links:
   #     key_trigger: s #WARNING: search only works with "s"
 
 # projects in header index
-# projects:
-#   - name: M2_SERVER
-#     url: https://github.com/QuiQiJingFeng/M2_SERVER
-#   - name: M2_CLIENT
-#     url: https://github.com/QuiQiJingFeng/M2_CLIENT
-#   - name: WECHAT_GAME
-#     url: https://github.com/QuiQiJingFeng/laya_slgc
+projects:
+  - name: M2_SERVER
+    url: https://github.com/QuiQiJingFeng/M2_SERVER
+  - name: M2_CLIENT
+    url: https://github.com/QuiQiJingFeng/M2_CLIENT
+  - name: WECHAT_GAME
+    url: https://github.com/QuiQiJingFeng/laya_slgc
 
 # exclude my node related stuff
 exclude: ['package.json', 'src', 'node_modules']
