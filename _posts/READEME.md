@@ -44,3 +44,9 @@ __加粗__
 :-|:-:|-:
 左对齐|居中对齐|右对齐
 
+
+<font color=#00ffff size=5>color=#00ffff</font>  
+<font face="黑体">我是黑体字</font>  
+<font face="微软雅黑">我是微软雅黑</font>  
+<font face="STCAIYUN">我是华文彩云</font>  
+<font color=#0099ff size=5 face="黑体">color=#0099ff size=5 face="黑体"</font>
