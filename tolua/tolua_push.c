@@ -16,7 +16,7 @@
 #include "lauxlib.h"
 
 #include <stdlib.h>
-
+//像栈中压入一个用户类型，REG_TABLE[meta] = {[".classname"] = "$CLSS_NAME"}
 void tolua_pushusertype_internal (lua_State* L, void* value, const char* type, int addToRoot)
 {
     if (value == NULL)
@@ -30,6 +30,7 @@ void tolua_pushusertype_internal (lua_State* L, void* value, const char* type, i
         }
         lua_pushstring(L,"tolua_ubox");
         lua_rawget(L,-2);                                           /* stack: mt ubox */
+        //----------这个判断可以忽略,现在每个类型都会维护一个tolua_ubox,具体请看mapinheritance和set_ubox
         if (lua_isnil(L, -1)) {
             lua_pop(L, 1);
             lua_pushstring(L, "tolua_ubox");

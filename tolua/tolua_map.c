@@ -25,6 +25,28 @@
 /* Create metatable
     * Create and register new metatable
 */
+/*
+    local tolua_classevents = function(meta) 
+        meta.__index = class_index_event;
+        meta.__newindex = class_newindex_event;
+        meta.__add = class_add_event;
+        meta.__sub = class_sub_event;
+        meta.__mul = class_mul_event;
+        meta.__div = class_div_event;
+        meta.__lt = class_lt_event;
+        meta.__le = class_le_event;
+        meta.__eq = class_eq_event;
+        meta.__call = class_call_event;
+        meta.__gc = class_gc_event;
+    end
+    --创建一个meta 用来作为userdata的metatable
+    local meta = {}
+    REG_TABLE[meta] = name
+    tolua_classevents(meta)
+    meta[".classname"] = name
+    
+
+*/
 static int tolua_newmetatable (lua_State* L, const char* name)
 {
     int r = luaL_newmetatable(L,name);
@@ -66,7 +88,7 @@ static void mapsuper (lua_State* L, const char* name, const char* base)
         lua_newtable(L);                    /* stack: super table */
         luaL_getmetatable(L,name);          /* stack: super table mt */
         lua_pushvalue(L,-2);                /* stack: super table mt table */
-        lua_rawset(L,-4);                   /* stack: super table */
+        lua_rawset(L,-4);                   /* stack: super table */ 
     }
 
     /* set base as super class */
@@ -94,6 +116,7 @@ static void mapsuper (lua_State* L, const char* name, const char* base)
 
 /* creates a 'tolua_ubox' table for base clases, and
 // expects the metatable and base metatable on the stack */
+//给某个类型对应的metatable设置tolua_ubox,如果基类存在tolua_ubox,则使用基类的,否则新建一个
 static void set_ubox(lua_State* L) {
 
     /* mt basemt */
@@ -103,7 +126,7 @@ static void set_ubox(lua_State* L) {
     } else {
         lua_pushnil(L);
     };
-    /* mt basemt base_ubox */
+    /* mt basemt base_ubox  基于同一个基类的子类公用一个tolua_ubox tolua_ubox 存储了所有的实例对象 {[lightuserdata] = userdata }*/  
     if (!lua_isnil(L,-1)) {
         lua_pushstring(L, "tolua_ubox");
         lua_insert(L, -2);
@@ -111,6 +134,7 @@ static void set_ubox(lua_State* L) {
         lua_rawset(L,-4);
         /* (mt with ubox) basemt */
     } else {
+        //如果基类也没有tolua_ubox，那么就创建一个
         /* mt basemt nil */
         lua_pop(L, 1);
         lua_pushstring(L,"tolua_ubox");
@@ -119,10 +143,10 @@ static void set_ubox(lua_State* L) {
         garbage-collected */
         lua_newtable(L);
         lua_pushliteral(L, "__mode");
-        lua_pushliteral(L, "v");
-        lua_rawset(L, -3);               /* stack: string ubox mt */
-        lua_setmetatable(L, -2);  /* stack:mt basemt string ubox */
-        lua_rawset(L,-4);
+        lua_pushliteral(L, "v");          
+        lua_rawset(L, -3);               /* stack: string ubox mt */  // local meta = {__mode = v}
+        lua_setmetatable(L, -2);  /* stack:mt basemt string ubox */   // tolua_ubox = {} setmetatable(tolua_ubox,meta)
+        lua_rawset(L,-4);         //mt["tolua_ubox"] = tolua_ubox
     };
 
 };
@@ -130,11 +154,12 @@ static void set_ubox(lua_State* L) {
 /* Map inheritance
     * It sets 'name' as derived from 'base' by setting 'base' as metatable of 'name'
 */
+//组织继承关系
 static void mapinheritance (lua_State* L, const char* name, const char* base)
 {
     /* set metatable inheritance */
     luaL_getmetatable(L,name);
-
+    //如果存在基类
     if (base && *base)
         luaL_getmetatable(L,base);
     else {
@@ -361,7 +386,61 @@ static int tolua_bnd_iskindof(lua_State *L)
 }
 
 /* static int class_gc_event (lua_State* L); */
+/*
+Lua伪代码:
+if not REG_TABLE.tolua_opened then
+    REG_TABLE.tolua_opened = true
 
+    REG_TABLE.tolua_value_root = {}
+    REG_TABLE.tolua_value_root.tolua_peers = {}
+    setmetatable(REG_TABLE.tolua_value_root.tolua_peers,{__mode = "k"})
+
+    REG_TABLE.tolua_ubox = {}
+    setmetatable(REG_TABLE.tolua_ubox,{__mode = "v"})
+
+    REG_TABLE.tolua_super = {}
+
+    REG_TABLE.tolua_gc = {}
+
+
+    local genFunc = function() 
+        local upvalue1 = REG_TABLE.tolua_gc
+        local upvalue2 = REG_TABLE.tolua_super
+        local function class_gc_event() --对应tolua_event.c中的class_gc_event方法
+            --TODO
+        end
+        return class_gc_event
+    end
+    REG_TABLE.tolua_gc_event = genFunc()
+
+    local meta = {[".classname"] = "tolua_commonclass"}
+    REG_TABLE[meta] = "tolua_commonclass"
+    meta.__index = class_index_event;
+    meta.__newindex = class_newindex_event;
+    meta.__add = class_add_event;
+    meta.__sub = class_sub_event;
+    meta.__mul = class_mul_event;
+    meta.__div = class_div_event;
+    meta.__lt = class_lt_event;
+    meta.__le = class_le_event;
+    meta.__eq = class_eq_event;
+    meta.__call = class_call_event;
+    meta.__gc = class_gc_event;
+
+    local tolua = {}
+    GLOBAL_TABLE["tolua"] = tolua
+    tolua.type = tolua_bnd_type
+    tolua.takeownership = tolua_bnd_takeownership
+    tolua.releaseownership = tolua_bnd_releaseownership
+    tolua.cast = tolua_bnd_cast
+    tolua.isnull = tolua_bnd_isnulluserdata
+    tolua.inherit = tolua_bnd_inherit
+    tolua.setpeer = tolua_bnd_setpeer
+    tolua.getpeer = tolua_bnd_getpeer
+    tolua.getcfunction = tolua_bnd_getcfunction
+    tolua.iskindof = tolua_bnd_iskindof
+end
+*/
 TOLUA_API void tolua_open (lua_State* L)
 {
     int top = lua_gettop(L);
@@ -441,8 +520,8 @@ TOLUA_API void tolua_open (lua_State* L)
         tolua_newmetatable(L,"tolua_commonclass");
 
         tolua_module(L,NULL,0);
-        tolua_beginmodule(L,NULL);
-        tolua_module(L,"tolua",0);
+        tolua_beginmodule(L,NULL);   //push GLOBAL_TABLE
+        tolua_module(L,"tolua",0);   // GLOBAL_TABLE["tolua"] = {}
         tolua_beginmodule(L,"tolua");
         tolua_function(L,"type",tolua_bnd_type);
         tolua_function(L,"takeownership",tolua_bnd_takeownership);
@@ -575,8 +654,8 @@ TOLUA_API void tolua_module (lua_State* L, const char* name, int hasvar)
             lua_pop(L,1);
             lua_newtable(L);
             lua_pushstring(L,name);
-            lua_pushvalue(L,-2);
-            lua_rawset(L,-4);       /* assing module into module */
+            lua_pushvalue(L,-2);     //stack:global tb name tb
+            lua_rawset(L,-4);       /* assing module into module */ 
         }
     }
     else
