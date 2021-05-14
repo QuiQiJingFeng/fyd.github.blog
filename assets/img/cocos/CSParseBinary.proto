@@ -1,0 +1,551 @@
+
+message CSParseBinary {
+    optional string version = 1;
+    optional string cocos2dVersion = 2;
+    optional string editorType = 3;
+    optional float dataScale = 4;
+    optional int32 designHeight = 5;
+    optional int32 designWidth = 6;
+    repeated string textures = 7;
+    repeated string texturesPng = 8;
+    optional NodeTree nodeTree = 9;
+    optional NodeAction action = 10;
+}
+
+
+message NodeTree {
+    optional string classname = 1;
+    optional string name = 2;
+    repeated NodeTree children = 3;
+    optional WidgetOptions widgetOptions = 4;
+    optional ButtonOptions buttonOptions = 5;
+    optional CheckBoxOptions checkBoxOptions = 6;
+    optional ImageViewOptions imageViewOptions = 7;
+    optional TextAtlasOptions textAtlasOptions = 8;
+    optional TextBMFontOptions textBMFontOptions = 9;
+    optional TextOptions textOptions = 10;
+    optional LoadingBarOptions loadingBarOptions = 11;
+    optional SliderOptions sliderOptions = 12;
+    optional TextFieldOptions textFieldOptions = 13;
+    optional ScrollViewOptions scrollViewOptions = 14;
+    optional PageViewOptions pageViewOptions = 15;
+    optional ListViewOptions listViewOptions = 16;
+    optional PanelOptions PanelOptions = 17;
+    optional SpriteOptions spriteOptions = 18;
+    optional TMXTiledMapOptions tmxTiledMapOptions = 19;
+    optional ParticleSystemOptions particleSystemOptions = 20;
+    optional ProjectNodeOptions projectNodeOptions = 21;
+}
+
+
+message WidgetOptions {
+    optional float x = 1;
+    optional float y = 2;
+    optional float scaleX = 3;
+    optional float scaleY = 4;
+    optional float rotation = 5;
+    optional bool flipX = 6;
+    optional bool flipY = 7;
+    optional int32 colorB = 8;
+    optional int32 colorG = 9;
+    optional int32 colorR = 10;
+    optional int32 opacity = 11;
+    optional bool touchAble = 12;
+    optional bool visible = 13;
+    optional int32 zorder = 14;
+    optional string classType = 15;
+    optional float width = 16;
+    optional float height = 17;
+    optional int32 positionType = 18;
+    optional float positionPercentX = 19;
+    optional float positionPercentY = 20;
+    optional int32 sizeType = 21;
+    optional float sizePercentX = 22;
+    optional float sizePercentY = 23;
+    optional bool useMergedTexture = 24;
+    optional int32 actionTag = 25;
+    optional int32 tag = 26;
+    optional float anchorPointX = 27;
+    optional float anchorPointY = 28;
+    optional bool ignoreSize = 29;
+    optional float rotationSkewX = 30;
+    optional float rotationSkewY = 31;
+    optional LayoutParameter layoutParameter = 32;
+    optional string customProperty = 33;
+    optional string frameEvent = 34;
+    optional string name = 35;
+    optional int32 Alpha = 37;
+    repeated ComponentOptions componentOptions = 36;
+}
+
+
+message LayoutParameter {
+    optional int32 type = 1;
+    optional int32 gravity = 2;
+    optional string relativeName = 3;
+    optional string relativeToName = 4;
+    optional int32 align = 5;
+    optional int32 marginLeft = 6;
+    optional int32 marginTop = 7;
+    optional int32 marginRight = 8;
+    optional int32 marginDown = 9;
+    optional int32 layoutEageType = 10;
+    optional int32 layoutNormalHorizontal = 11;
+    optional int32 layoutNormalVertical = 12;
+    optional int32 layoutParentHorizontal = 13;
+    optional int32 layoutParentVertical = 14;
+}
+
+
+message ButtonOptions {
+    optional string name = 1;
+    optional string classname = 2;
+    optional string normal = 3;
+    optional string pressed = 4;
+    optional string disabled = 5;
+    optional ResourceData normalData = 6;
+    optional ResourceData pressedData = 7;
+    optional ResourceData disabledData = 8;
+    optional string text = 9;
+    optional string fontName = 10;
+    optional int32 fontSize = 11;
+    optional int32 textColorR = 12;
+    optional int32 textColorG = 13;
+    optional int32 textColorB = 14;
+    optional float capInsetsX = 15;
+    optional float capInsetsY = 16;
+    optional float capInsetsWidth = 17;
+    optional float capInsetsHeight = 18;
+    optional float scale9Width = 19;
+    optional float scale9Height = 20;
+    optional bool scale9Enable = 21;
+    optional bool displaystate = 22;
+    optional ResourceData fontResource = 23;
+}
+
+
+message ResourceData {
+    optional string path = 1;
+    optional string plistFile = 2;
+    optional int32 resourceType = 3;
+}
+
+
+message CheckBoxOptions {
+    optional string name = 1;
+    optional string classname = 2;
+    optional string backGroundBox = 3;
+    optional string backGroundBoxSelected = 4;
+    optional string backGroundBoxDisabled = 5;
+    optional string frontCross = 6;
+    optional string frontCrossDisabled = 7;
+    optional ResourceData backGroundBoxData = 8;
+    optional ResourceData backGroundBoxSelectedData = 9;
+    optional ResourceData frontCrossData = 10;
+    optional ResourceData backGroundBoxDisabledData = 11;
+    optional ResourceData frontCrossDisabledData = 12;
+    optional bool selectedState = 13;
+    optional bool displaystate = 14;
+}
+
+
+message ImageViewOptions {
+    optional string name = 1;
+    optional string classname = 2;
+    optional string fileName = 3;
+    optional ResourceData fileNameData = 4;
+    optional float capInsetsX = 5;
+    optional float capInsetsY = 6;
+    optional float capInsetsHeight = 7;
+    optional float capInsetsWidth = 8;
+    optional float scale9Width = 9;
+    optional float scale9Height = 10;
+    optional bool scale9Enable = 11;
+    optional bool flippedX = 12;
+    optional bool flippedY = 13;
+}
+
+
+message TextAtlasOptions {
+    optional string name = 1;
+    optional string classname = 2;
+    optional string stringValue = 3;
+    optional string charMapFile = 4;
+    optional ResourceData charMapFileData = 5;
+    optional string startCharMap = 6;
+    optional int32 itemWidth = 7;
+    optional int32 itemHeight = 8;
+}
+
+
+message TextBMFontOptions {
+    optional string name = 1;
+    optional string classname = 2;
+    optional string text = 3;
+    optional ResourceData fileNameData = 4;
+}
+
+
+message TextOptions {
+    optional string name = 1;
+    optional string classname = 2;
+    optional string fontName = 3;
+    optional ResourceData fontFile = 4;
+    optional int32 fontSize = 5;
+    optional string text = 6;
+    optional float areaWidth = 7;
+    optional float areaHeight = 8;
+    optional int32 hAlignment = 9;
+    optional int32 vAlignment = 10;
+    optional bool touchScaleEnable = 11;
+    optional ResourceData fontResource = 12;
+    optional bool IsCustomSize = 13;
+}
+
+
+message LoadingBarOptions {
+    optional string name = 1;
+    optional string classname = 2;
+    optional string texture = 3;
+    optional ResourceData textureData = 4;
+    optional int32 percent = 5;
+    optional int32 direction = 6;
+    optional float capInsetsX = 7;
+    optional float capInsetsY = 8;
+    optional float capInsetsWidth = 9;
+    optional float capInsetsHeight = 10;
+    optional bool scale9Enable = 11;
+    optional float scale9Width = 12;
+    optional float scale9Height = 13;
+}
+
+
+message ListViewOptions {
+    optional string name = 1;
+    optional string classname = 2;
+    optional string backGroundImage = 3;
+    optional ResourceData backGroundImageData = 4;
+    optional int32 bgColorR = 5;
+    optional int32 bgColorG = 6;
+    optional int32 bgColorB = 7;
+    optional int32 bgStartColorR = 8;
+    optional int32 bgStartColorG = 9;
+    optional int32 bgStartColorB = 10;
+    optional int32 bgEndColorR = 11;
+    optional int32 bgEndColorG = 12;
+    optional int32 bgEndColorB = 13;
+    optional int32 colorType = 14;
+    optional int32 bgColorOpacity = 15;
+    optional float vectorX = 16;
+    optional float vectorY = 17;
+    optional float capInsetsX = 18;
+    optional float capInsetsY = 19;
+    optional float capInsetsWidth = 20;
+    optional float capInsetsHeight = 21;
+    optional bool backGroundScale9Enable = 22;
+    optional float innerWidth = 23;
+    optional float innerHeight = 24;
+    optional bool clipAble = 25;
+    optional bool bounceEnable = 26;
+    optional int32 direction = 27;
+    optional int32 gravity = 28;
+    optional int32 itemMargin = 29;
+    optional float scale9Width = 30;
+    optional float scale9Height = 31;
+}
+
+
+message PageViewOptions {
+    optional string name = 1;
+    optional string classname = 2;
+    optional string backGroundImage = 3;
+    optional ResourceData backGroundImageData = 4;
+    optional bool clipAble = 5;
+    optional int32 bgColorR = 6;
+    optional int32 bgColorG = 7;
+    optional int32 bgColorB = 8;
+    optional int32 bgStartColorR = 9;
+    optional int32 bgStartColorG = 10;
+    optional int32 bgStartColorB = 11;
+    optional int32 bgEndColorR = 12;
+    optional int32 bgEndColorG = 13;
+    optional int32 bgEndColorB = 14;
+    optional int32 colorType = 15;
+    optional int32 bgColorOpacity = 16;
+    optional float vectorX = 17;
+    optional float vectorY = 18;
+    optional float capInsetsX = 19;
+    optional float capInsetsY = 20;
+    optional float capInsetsWidth = 21;
+    optional float capInsetsHeight = 22;
+    optional bool backGroundScale9Enable = 23;
+    optional float scale9Width = 24;
+    optional float scale9Height = 25;
+}
+
+
+message PanelOptions {
+    optional string name = 1;
+    optional string classname = 2;
+    optional string backGroundImage = 3;
+    optional ResourceData backGroundImageData = 4;
+    optional bool clipAble = 5;
+    optional int32 bgColorR = 6;
+    optional int32 bgColorG = 7;
+    optional int32 bgColorB = 8;
+    optional int32 bgStartColorR = 9;
+    optional int32 bgStartColorG = 10;
+    optional int32 bgStartColorB = 11;
+    optional int32 bgEndColorR = 12;
+    optional int32 bgEndColorG = 13;
+    optional int32 bgEndColorB = 14;
+    optional int32 colorType = 15;
+    optional int32 bgColorOpacity = 16;
+    optional float vectorX = 17;
+    optional float vectorY = 18;
+    optional float capInsetsX = 19;
+    optional float capInsetsY = 20;
+    optional float capInsetsWidth = 21;
+    optional float capInsetsHeight = 22;
+    optional bool backGroundScale9Enable = 23;
+    optional int32 layoutType = 24;
+    optional bool adaptScreen = 25;
+    optional float scale9Width = 26;
+    optional float scale9Height = 27;
+}
+
+
+message ScrollViewOptions {
+    optional string name = 1;
+    optional string classname = 2;
+    optional string backGroundImage = 3;
+    optional ResourceData backGroundImageData = 4;
+    optional int32 bgColorR = 5;
+    optional int32 bgColorG = 6;
+    optional int32 bgColorB = 7;
+    optional int32 bgStartColorR = 8;
+    optional int32 bgStartColorG = 9;
+    optional int32 bgStartColorB = 10;
+    optional int32 bgEndColorR = 11;
+    optional int32 bgEndColorG = 12;
+    optional int32 bgEndColorB = 13;
+    optional int32 colorType = 14;
+    optional int32 bgColorOpacity = 15;
+    optional float vectorX = 16;
+    optional float vectorY = 17;
+    optional float capInsetsX = 18;
+    optional float capInsetsY = 19;
+    optional float capInsetsWidth = 20;
+    optional float capInsetsHeight = 21;
+    optional bool backGroundScale9Enable = 22;
+    optional float innerWidth = 23;
+    optional float innerHeight = 24;
+    optional int32 direction = 25;
+    optional bool clipAble = 26;
+    optional bool bounceEnable = 27;
+    optional int32 layoutType = 28;
+    optional float scale9Width = 29;
+    optional float scale9Height = 30;
+}
+
+
+message SliderOptions {
+    optional string name = 1;
+    optional string classname = 2;
+    optional string barFileName = 3;
+    optional string ballNormal = 4;
+    optional string ballPressed = 5;
+    optional string ballDisabled = 6;
+    optional ResourceData barFileNameData = 7;
+    optional ResourceData ballNormalData = 8;
+    optional ResourceData ballPressedData = 9;
+    optional ResourceData ballDisabledData = 10;
+    optional ResourceData progressBarData = 11;
+    optional int32 percent = 12;
+    optional float capInsetsX = 13;
+    optional float capInsetsY = 14;
+    optional float capInsetsWidth = 15;
+    optional float capInsetsHeight = 16;
+    optional float barCapInsetsX = 17;
+    optional float barCapInsetsY = 18;
+    optional float barCapInsetsWidth = 19;
+    optional float barCapInsetsHeight = 20;
+    optional float progressBarCapInsetsX = 21;
+    optional float progressBarCapInsetsY = 22;
+    optional float progressBarCapInsetsWidth = 23;
+    optional float progressBarCapInsetsHeight = 24;
+    optional float scale9Width = 25;
+    optional float scale9Height = 26;
+    optional bool scale9Enable = 27;
+    optional float slidBallAnchorPointX = 28;
+    optional float slidBallAnchorPointY = 29;
+    optional float length = 30;
+    optional bool displaystate = 31;
+}
+
+
+message SpriteOptions {
+    optional string name = 1;
+    optional string classname = 2;
+    optional bool touchAble = 3;
+    optional int32 positionType = 4;
+    optional float positionPercentX = 5;
+    optional float positionPercentY = 6;
+    optional int32 sizeType = 7;
+    optional float sizePercentX = 8;
+    optional float sizePercentY = 9;
+    optional bool useMergedTexture = 10;
+    optional bool ignoreSize = 11;
+    optional LayoutParameter layoutParameter = 12;
+    optional string customProperty = 13;
+    optional string fileName = 14;
+    optional bool flippedX = 15;
+    optional bool flippedY = 16;
+    optional ResourceData fileNameData = 17;
+}
+
+
+message TextFieldOptions {
+    optional string name = 1;
+    optional string classname = 2;
+    optional string fontName = 3;
+    optional ResourceData fontFile = 4;
+    optional int32 fontSize = 5;
+    optional string text = 6;
+    optional string placeHolder = 7;
+    optional bool passwordEnable = 8;
+    optional string passwordStyleText = 9;
+    optional bool maxLengthEnable = 10;
+    optional int32 maxLength = 11;
+    optional float areaWidth = 12;
+    optional float areaHeight = 13;
+    optional float anchorPointX = 15;
+    optional float anchorPointY = 16;
+    optional ResourceData fontResource = 14;
+    optional bool IsCustomSize = 17;
+}
+
+
+message TMXTiledMapOptions {
+    optional string tmxFile = 1;
+    optional string tmxString = 2;
+    optional string resourcePath = 3;
+    optional ResourceData fileNameData = 4;
+}
+
+
+message ParticleSystemOptions {
+    optional string plistFile = 1;
+    optional int32 totalParticles = 2;
+    optional ResourceData fileNameData = 3;
+}
+
+
+message ProjectNodeOptions {
+    optional string fileName = 1;
+}
+
+
+message ComponentOptions {
+    optional string type = 1;
+    optional ComAudioOptions comAudioOptions = 2;
+}
+
+
+message ComAudioOptions {
+    optional string name = 1;
+    optional bool enabled = 2;
+    optional bool loop = 3;
+    optional int32 volume = 4;
+    optional ResourceData fileNameData = 5;
+}
+
+
+message NodeAction {
+    optional string name = 1;
+    optional string classname = 2;
+    optional int32 duration = 3;
+    optional float speed = 4;
+    repeated TimeLine timelines = 5;
+}
+
+
+message TimeLine {
+    optional string name = 1;
+    optional string classname = 2;
+    optional string frameType = 3;
+    optional int32 actionTag = 4;
+    repeated Frame frames = 5;
+}
+
+
+message Frame {
+    optional TimeLineBoolFrame visibleFrame = 5;
+    optional TimeLineIntFrame zOrderFrame = 6;
+    optional TimeLinePointFrame rotationSkewFrame = 7;
+    optional TimeLineStringFrame eventFrame = 8;
+    optional TimeLinePointFrame anchorPointFrame = 9;
+    optional TimeLinePointFrame positionFrame = 10;
+    optional TimeLinePointFrame scaleFrame = 11;
+    optional TimeLineColorFrame colorFrame = 12;
+    optional TimeLineTextureFrame textureFrame = 13;
+}
+
+
+message TimeLineBoolFrame {
+    optional string name = 1;
+    optional string classname = 2;
+    optional int32 frameIndex = 3;
+    optional bool tween = 4;
+    optional bool value = 5;
+}
+
+
+message TimeLineIntFrame {
+    optional string name = 1;
+    optional string classname = 2;
+    optional int32 frameIndex = 3;
+    optional bool tween = 4;
+    optional int32 value = 5;
+}
+
+
+message TimeLineStringFrame {
+    optional string name = 1;
+    optional string classname = 2;
+    optional int32 frameIndex = 3;
+    optional bool tween = 4;
+    optional string value = 5;
+}
+
+
+message TimeLinePointFrame {
+    optional string name = 1;
+    optional string classname = 2;
+    optional int32 frameIndex = 3;
+    optional bool tween = 4;
+    optional float x = 5;
+    optional float y = 6;
+}
+
+
+message TimeLineColorFrame {
+    optional string name = 1;
+    optional string classname = 2;
+    optional int32 frameIndex = 3;
+    optional bool tween = 4;
+    optional int32 alpha = 5;
+    optional int32 red = 6;
+    optional int32 green = 7;
+    optional int32 blue = 8;
+}
+
+
+message TimeLineTextureFrame {
+    optional string name = 1;
+    optional string classname = 2;
+    optional int32 frameIndex = 3;
+    optional bool tween = 4;
+    optional string filePath = 5;
+    optional string plistFile = 6;
+}
