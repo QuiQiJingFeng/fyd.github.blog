@@ -3,7 +3,7 @@ title: Lorem Ipsum - Web Developer
 description: "ZhaoQingLong's Blog ..."
 baseurl: "/blog" # for test: remove string '/space-jekyll-template' to ''
 url: "https://quiqijingfeng.github.io/blog/" # for test: remove string 'http://victorvoid.github.io' to '' but in production: 'https://yourusername.github.io'
-
+future: true
 # User settings
 username: ZhaoQingLong
 user_title: ZhaoQingLong
